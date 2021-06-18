@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectExtensions : MonoBehaviour
+public static class GameObjectExtensions
 {
-    // Start is called before the first frame update
-    void Start()
+    public static bool HasComponent<T>(this GameObject gameObject)
     {
-        
+        return gameObject.TryGetComponent<T>(out T component);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static bool HasComponent<T>(this GameObject gameObject, out T component)
     {
-        
+        return gameObject.TryGetComponent<T>(out component);
+    }
+
+    public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+    {
+        if (gameObject.TryGetComponent<T>(out T result))
+        {
+            return result;
+        }
+        else
+        {
+            return gameObject.AddComponent<T>();
+        }
     }
 }
