@@ -1,10 +1,5 @@
 using System;
 using UnityEngine;
-<<<<<<< Updated upstream
-using UnityEngine.Events;
-=======
-using System;
->>>>>>> Stashed changes
 
 public class PlayerMovement : MonoBehaviour
 {
