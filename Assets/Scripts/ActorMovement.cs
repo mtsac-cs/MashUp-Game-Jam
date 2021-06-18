@@ -13,7 +13,7 @@ public class ActorMovement : MonoBehaviour
         onMove = new UnityEvent();
     }
 
-    public void OnMoved()
+    protected void OnMoved()
     {
         onMove?.Invoke();
     }

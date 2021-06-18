@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [NonSerialized]
+    public ActorMovement actorMovement;
+
     void Start()
     {
-        
+        actorMovement = gameObject.AddComponent<ActorMovement>();
     }
 
     // Update is called once per frame
