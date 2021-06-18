@@ -11,7 +11,6 @@ public class Actor : MonoBehaviour
         actorMovement = gameObject.AddComponent<ActorMovement>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
