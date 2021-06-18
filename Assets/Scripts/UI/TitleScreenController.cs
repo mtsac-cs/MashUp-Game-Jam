@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +14,6 @@ public class TitleScreenController : MonoBehaviour
     void Start()
     {
         startButton.onClick.AddListener(() => SceneManager.LoadScene(""));
-        exitButton.onClick.AddListener(() => Application.Quit(0));
+        exitButton.onClick.AddListener(() => gameObject.AddComponent<ExitGameComponent>());
     }
 }
