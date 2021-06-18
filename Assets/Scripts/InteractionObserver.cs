@@ -7,7 +7,7 @@ public class InteractionObserver : MonoBehaviour
     private bool onTriggerExit;
     private bool onTriggerStay;
 
-    public InteractionObserver Init(bool onTriggerEnter = false, bool onTriggerExit = false, bool onTriggerStay = false)
+    public InteractionObserver Init(bool onTriggerEnter = true, bool onTriggerExit = false, bool onTriggerStay = false)
     {
         this.onTriggerEnter = onTriggerEnter;
         this.onTriggerExit = onTriggerExit;
