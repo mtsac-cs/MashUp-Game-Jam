@@ -10,7 +10,7 @@ public class PlayerMovement : ActorMovement
     [Range(1,10)]
     public float moveSpeed = 2.5f;
 
-    Animator animator;
+    Animator animator; // move this to RobotModel?
     Vector2 moveDirection = Vector2.down;
 
 
@@ -26,6 +26,7 @@ public class PlayerMovement : ActorMovement
     {
         CalculateMovement();
     }
+
     void CalculateMovement()
     {
         if(rb.velocity.magnitude<=.001f){
