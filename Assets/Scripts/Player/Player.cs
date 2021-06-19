@@ -16,12 +16,12 @@ public class Player : MonoBehaviour
     [NonSerialized]
     public PlayerMovement playerMovement;
 
-    void Start()
+    private void Awake()
     {
         instance = this;
         playerMovement = GetComponent<PlayerMovement>();
         robotModel = GetComponent<RobotModel>();
-        
+
         InitPlayerStats();
     }
 
@@ -38,5 +38,10 @@ public class Player : MonoBehaviour
 
         var health = gameObject.GetOrAddComponent<HealthStat>().Init(robotModel.numScrewsPerBody);
         stats.Add(health);
+    }
+
+    public HealthStat GetHealthStat()
+    {
+        return gameObject.GetComponent<HealthStat>();
     }
 }
