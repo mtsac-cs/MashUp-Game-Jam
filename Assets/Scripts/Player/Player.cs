@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
             stats.Clear();
         }
 
-        var health = new HealthStat().Init(robotModel.numScrewsPerBody);
+        var health = gameObject.GetOrAddComponent<HealthStat>().Init(robotModel.numScrewsPerBody);
         stats.Add(health);
     }
 }
