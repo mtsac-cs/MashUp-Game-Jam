@@ -5,17 +5,17 @@ using UnityEngine.Events;
 public class ActorMovement : MonoBehaviour
 {
     [NonSerialized]
-    public UnityEvent<ActorMovedEvent> onMove;
+    public UnityEvent<ActorMovedEventInfo> onMove;
 
     // Start is called before the first frame update
     void Start()
     {
-        onMove = new UnityEvent<ActorMovedEvent>();
+        onMove = new UnityEvent<ActorMovedEventInfo>();
     }
 
     protected void OnMoved(Vector2 direction, float amount)
     {
-        onMove?.Invoke(new ActorMovedEvent(direction, amount));
+        onMove?.Invoke(new ActorMovedEventInfo(direction, amount));
     }
 
     protected string GetDirectionName(Vector2 direction)

@@ -1,9 +1,9 @@
-﻿public class StatValueChangedEvent
+﻿public class StatChangedEventInfo
 {
     public float PreviousValue { get; set; }
     public float CurrentValue { get; set; }
 
-    public StatValueChangedEvent(float previousValue, float currentValue)
+    public StatChangedEventInfo(float previousValue, float currentValue)
     {
         PreviousValue = previousValue;
         CurrentValue = currentValue;

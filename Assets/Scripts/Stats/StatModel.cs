@@ -3,16 +3,16 @@ using UnityEngine.Events;
 
 public class StatModel : MonoBehaviour
 {
-    public UnityEvent<StatValueChangedEvent> onValueChanged;
-    public UnityEvent<StatValueChangedEvent> onMaxValueChanged;
+    public UnityEvent<StatChangedEventInfo> onValueChanged;
+    public UnityEvent<StatChangedEventInfo> onMaxValueChanged;
 
     public float CurrentValue { get; private set; }
     public float MaxValue { get; private set; }
 
     private void Start()
     {
-        onValueChanged = new UnityEvent<StatValueChangedEvent>();
-        onMaxValueChanged = new UnityEvent<StatValueChangedEvent>();
+        onValueChanged = new UnityEvent<StatChangedEventInfo>();
+        onMaxValueChanged = new UnityEvent<StatChangedEventInfo>();
     }
 
     public StatModel Init(float maxValue) => Init(maxValue, maxValue);
@@ -30,7 +30,7 @@ public class StatModel : MonoBehaviour
     {
         var previousValue = CurrentValue;
         CurrentValue = Mathf.Clamp(value, 0, MaxValue);
-        onValueChanged?.Invoke(new StatValueChangedEvent(previousValue, CurrentValue));
+        onValueChanged?.Invoke(new StatChangedEventInfo(previousValue, CurrentValue));
     }
 
 
@@ -41,6 +41,6 @@ public class StatModel : MonoBehaviour
     {
         var previousValue = MaxValue;
         MaxValue = maxValue;
-        onMaxValueChanged?.Invoke(new StatValueChangedEvent(previousValue, MaxValue));
+        onMaxValueChanged?.Invoke(new StatChangedEventInfo(previousValue, MaxValue));
     }
 }
