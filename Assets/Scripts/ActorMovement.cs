@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class ActorMovement : MonoBehaviour
 {
+    [NonSerialized]
     public UnityEvent<ActorMovedEventInfo> onMove;
 
     // Start is called before the first frame update

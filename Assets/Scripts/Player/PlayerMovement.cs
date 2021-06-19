@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : ActorMovement
 {
     [NonSerialized]
     public Player player;
+
+    [NonSerialized]
     public Rigidbody2D rb;
 
     [Range(1,10)]
@@ -18,7 +21,7 @@ public class PlayerMovement : ActorMovement
     {
         animator = gameObject.GetOrAddComponent<Animator>();
         player = gameObject.GetOrAddComponent<Player>();
-        rb = gameObject.GetOrAddComponent<Rigidbody2D>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
