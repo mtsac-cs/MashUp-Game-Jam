@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class StatModel : MonoBehaviour
 {
+    [NonSerialized]
     public UnityEvent<StatChangedEventInfo> onValueChanged = new UnityEvent<StatChangedEventInfo>();
+
+    [NonSerialized]
     public UnityEvent<StatChangedEventInfo> onMaxValueChanged = new UnityEvent<StatChangedEventInfo>();
 
     public float CurrentValue { get; private set; }
