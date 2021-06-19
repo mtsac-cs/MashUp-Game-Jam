@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,21 +10,61 @@ public class Projectile : MonoBehaviour, IInteractable
     public UnityEvent OnInteract => new UnityEvent();
     public float damageAmount = 1f;
 
-    void Start()
+    [NonSerialized]
+    public Rigidbody2D rb;
+
+    Vector2? travelDir = null;
+    float projectileSpeed = 20f;
+    float distanceTravelled = 0f;
+    float maxProjectileDistance = 500;
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void Init(Vector3 direction)
     {
-        Debug.Log(direction.ToString());
-        //StartCoroutine(Move(direction));
+        travelDir =  Camera.main.ScreenToWorldPoint(new Vector3(direction.x, direction.y));
+        
+        /*float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        StartCoroutine(Move(direction));*/
     }
 
-    private IEnumerator Move(Vector3 direction)
+    
+    private void FixedUpdate()
     {
-        yield return null;
+        if (!travelDir.HasValue)
+            return;
+
+        if (distanceTravelled > maxProjectileDistance)
+        {
+            Debug.Log("Projectile destroy");
+            GameObject.Destroy(gameObject);
+        }
+        
+        var direction = travelDir.Value;
+
+        rb.AddForce(direction);
+        //transform.position = Vector2.MoveTowards(transform.position, direction, projectileSpeed * Time.deltaTime);
+        distanceTravelled += projectileSpeed;
     }
+
+    /*private IEnumerator Move(Vector3 direction)
+    {
+        float distanceTravelled = 0f;
+        float amountToTravel = 0.01f;
+        direction = Camera.main.ScreenToWorldPoint(new Vector3(direction.x, direction.y, 0.0f));
+
+        while (distanceTravelled < maxProjectileDistance)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, direction, amountToTravel);
+            
+            yield return new WaitForEndOfFrame();
+            distanceTravelled += amountToTravel;
+            
+        }
+    }*/
 
     public bool CanInteract() => true;
 

@@ -6,14 +6,9 @@ public class RangedWeapon : MonoBehaviour
     public GameObject projectilePrefab;
     public Projectile ProjectileModel { get { return projectilePrefab.GetComponent<Projectile>(); } }
 
+
     public float fireRate;
     bool isFiring;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,7 +22,9 @@ public class RangedWeapon : MonoBehaviour
     IEnumerator FireWeapon()
     {
         isFiring = true;
-        var projectileGO = GameObject.Instantiate(projectilePrefab);
+        var projectileGO = GameObject.Instantiate(projectilePrefab, transform);
+        projectileGO.transform.position = transform.position;
+
         var projectile = projectileGO.GetComponent<Projectile>();
         
         projectile.Init(Input.mousePosition);
