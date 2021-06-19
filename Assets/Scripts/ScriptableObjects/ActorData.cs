@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class ActorData : ScriptableObject
+public class ActorData : ScriptableObject
 {
     public string actorName;
 
