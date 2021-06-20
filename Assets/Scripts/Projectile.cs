@@ -29,10 +29,8 @@ public class Projectile : MonoBehaviour, IInteractable
         //travelDir = Camera.main.ScreenToWorldPoint(new Vector3(direction.x, direction.y)) - Camera.main.WorldToScreenPoint(transform.position);
         travelDir = (direction - Camera.main.WorldToScreenPoint(transform.position));
         travelDir = travelDir.Value.normalized;
-        Debug.Log(travelDir);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
         angle = Vector2.Angle(Vector2.right, travelDir.Value);
-        Debug.Log(angle);
         //float angle = Mathf.Atan2(travelDir.Value.y, travelDir.Value.x) * Mathf.Rad2Deg - 90;
         // if (travelDir.Value.x > 0 && travelDir.Value.y > 0) //1st quadrant
         // {
@@ -53,7 +51,6 @@ public class Projectile : MonoBehaviour, IInteractable
         if(angle>0&&travelDir.Value.y>0){
             transform.localRotation = Quaternion.Euler(0, 0, angle);
         }else if(travelDir.Value.y<0){
-            Debug.Log("here");
             transform.localRotation = Quaternion.Euler(0, 0, angle*-1);
         }
 
