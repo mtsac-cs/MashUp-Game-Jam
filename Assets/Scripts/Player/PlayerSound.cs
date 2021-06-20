@@ -15,7 +15,7 @@ public class PlayerSound : MonoBehaviour
         soundContainer = Instantiate(new GameObject(), transform.position, Quaternion.identity, transform);
 
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -33,16 +33,22 @@ public class PlayerSound : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(playerData.walkSound, transform.position);
     }
-    public void PlayDeathSound(){
-
+    public void PlayDeathSound()
+    {
+        AudioSource.PlayClipAtPoint(playerData.onDeathSound, transform.position);
     }
-    public void PlayAttackSound(){
 
+    public void PlayAttackSound()
+    {
+        AudioSource.PlayClipAtPoint(playerData.attackSound, transform.position);
     }
-    public void PlayOnHitSound(){
 
+    public void PlayOnHitSound()
+    {
+        AudioSource.PlayClipAtPoint(playerData.onHitSound, transform.position);
     }
-    void PlaySound()
+
+    void PlayWalkSound()
     {
         AudioSource.PlayClipAtPoint(playerData.walkSound, transform.position);
     }
