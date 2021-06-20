@@ -16,7 +16,7 @@ public class PlayerMovement : ActorMovement
     Animator animator; // move this to RobotModel?
     Vector2 moveDirection = Vector2.down;
 
-
+    float time = 0;
     void Start()
     { 
         animator = gameObject.GetOrAddComponent<Animator>();
@@ -39,7 +39,8 @@ public class PlayerMovement : ActorMovement
         moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxis("Vertical")).normalized;
         rb.velocity = moveDirection * moveSpeed;
 
-        if(moveDirection.magnitude>.5f&&rb.velocity.magnitude>1){
+        if(moveDirection.magnitude>.5f&&rb.velocity.magnitude>1&&Time.time-time>.75f){
+            time = Time.time;
             this.OnMoved(moveDirection,0);
         }
     }
