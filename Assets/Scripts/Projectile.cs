@@ -25,7 +25,9 @@ public class Projectile : MonoBehaviour, IInteractable
 
     public void Init(Vector3 direction)
     {
-        travelDir =  Camera.main.ScreenToWorldPoint(new Vector3(direction.x, direction.y));
+        //travelDir = Camera.main.ScreenToWorldPoint(new Vector3(direction.x, direction.y)) - Camera.main.WorldToScreenPoint(transform.position);
+        travelDir = (direction - Camera.main.WorldToScreenPoint(transform.position))*1000;
+        travelDir = travelDir.Value.normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //float angle = Mathf.Atan2(travelDir.Value.y, travelDir.Value.x) * Mathf.Rad2Deg - 90;
 
@@ -37,7 +39,7 @@ public class Projectile : MonoBehaviour, IInteractable
         rb.AddForce(test * projectileSpeed * Time.deltaTime, ForceMode2D.Impulse);
     }
 
-    
+
     private void FixedUpdate()
     {
         if (!travelDir.HasValue)
@@ -54,8 +56,8 @@ public class Projectile : MonoBehaviour, IInteractable
 
         Vector2 test = new Vector2(direction.x, -direction.y);
         rb.AddForce(-direction * projectileSpeed * Time.deltaTime, ForceMode2D.Impulse);
-        
-        
+
+
         //rb.SetRotation(angle);
 
         //var rotate = Vector3.RotateTowards(transform.position, direction, 360, 10);
