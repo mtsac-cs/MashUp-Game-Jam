@@ -16,7 +16,10 @@ public class AnimatorData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("velocityY",rb.velocity.y);
-        animator.SetFloat("velocityX",rb.velocity.x);
+        animator.SetFloat("velocityY", rb.velocity.y);
+        animator.SetFloat("velocityX", rb.velocity.x);
+
+        animator.SetBool("IsMoving", (Mathf.Abs(Input.GetAxisRaw("Horizontal"))>0||Mathf.Abs(Input.GetAxisRaw("Vertical"))>0));
+
     }
 }

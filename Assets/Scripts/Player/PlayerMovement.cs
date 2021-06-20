@@ -39,10 +39,10 @@ public class PlayerMovement : ActorMovement
         moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxis("Vertical")).normalized;
         rb.velocity = moveDirection * moveSpeed;
 
-        if(moveDirection.magnitude>.5f&&rb.velocity.magnitude>1&&Time.time-time>.75f){
-            time = Time.time;
-            this.OnMoved(moveDirection,0);
-        }
+        // if(moveDirection.magnitude>.5f&&rb.velocity.magnitude>1&&Time.time-time>.75f){
+        //     time = Time.time;
+        //     this.OnMoved(moveDirection,0);
+        // }
     }
     void TestMove(){
 

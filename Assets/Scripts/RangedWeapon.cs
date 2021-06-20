@@ -6,10 +6,17 @@ public class RangedWeapon : MonoBehaviour
     public GameObject projectilePrefab;
     public Projectile ProjectileModel { get { return projectilePrefab.GetComponent<Projectile>(); } }
 
-
+    public ActiveActorData actorData;
     public float fireRate;
     bool isFiring;
 
+    private GameObject bulletContainer;
+    void Start()
+    {
+        bulletContainer = Instantiate(new GameObject(),Vector3.zero,Quaternion.identity);    
+        bulletContainer.transform.parent = null;
+        bulletContainer.transform.name = "BulletContainer";
+    }
     // Update is called once per frame
     void Update()
     {
@@ -28,8 +35,10 @@ public class RangedWeapon : MonoBehaviour
     // }
     IEnumerator FireWeapon()
     {
+        AudioSource.PlayClipAtPoint(actorData.attackSound,transform.position);
         isFiring = true;
-        var projectileGO = GameObject.Instantiate(projectilePrefab, transform);
+        var projectileGO = GameObject.Instantiate(projectilePrefab, transform,bulletContainer);
+        projectileGO.transform.parent = bulletContainer.transform;
         projectileGO.transform.position = transform.position;
 
         var projectile = projectileGO.GetComponent<Projectile>();
