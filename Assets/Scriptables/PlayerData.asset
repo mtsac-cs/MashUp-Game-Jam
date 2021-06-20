@@ -15,5 +15,5 @@ MonoBehaviour:
   actorName: Player
   attackSound: {fileID: 8300000, guid: 8000de5f15b84d044807a013fa99d7cf, type: 3}
   walkSound: {fileID: 8300000, guid: cdb0874b174071c4e933a947cbd95d14, type: 3}
-  onDeathSound: {fileID: 0}
+  onDeathSound: {fileID: 8300000, guid: 2e2415c70b46af144872a71bbada31c4, type: 3}
   onHitSound: {fileID: 8300000, guid: c052d83b6ba19ca43943d334b24cd23d, type: 3}

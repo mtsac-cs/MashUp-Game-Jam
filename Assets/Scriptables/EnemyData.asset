@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   actorName: 
-  attackSound: {fileID: 0}
-  walkSound: {fileID: 0}
-  onDeathSound: {fileID: 0}
-  onHitSound: {fileID: 0}
-  walkingSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: cdb0874b174071c4e933a947cbd95d14, type: 3}
+  walkSound: {fileID: 8300000, guid: 409e4db6657fb4d41828b2ddc8cfca6b, type: 3}
+  onDeathSound: {fileID: 8300000, guid: cda5a021c2a5e254b9fc0bc0cc623783, type: 3}
+  onHitSound: {fileID: 8300000, guid: 51b24e453d967024fa553d2ef435d389, type: 3}
