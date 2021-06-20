@@ -8,7 +8,7 @@ public class ActorMovement : MonoBehaviour
     public UnityEvent<ActorMovedEventInfo> onMove;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         onMove = new UnityEvent<ActorMovedEventInfo>();
     }
