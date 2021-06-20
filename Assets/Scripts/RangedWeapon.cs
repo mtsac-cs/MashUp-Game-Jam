@@ -19,6 +19,13 @@ public class RangedWeapon : MonoBehaviour
         }
     }
 
+    // private void OnDrawGizmos()
+    // {
+    //     Vector2 travelDir = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position));
+    //     travelDir = travelDir.normalized;
+    //     Gizmos.color = Color.cyan;
+    //     Gizmos.DrawLine(Vector2.zero,travelDir);
+    // }
     IEnumerator FireWeapon()
     {
         isFiring = true;
