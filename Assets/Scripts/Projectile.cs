@@ -27,7 +27,10 @@ public class Projectile : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        Destroy(this.gameObject, 10f);
+        if (ignoreTag.ToString() != "Enemy")
+        {
+            Destroy(this.gameObject, 10f);
+        }
         rb = GetComponent<Rigidbody2D>();
     }
 

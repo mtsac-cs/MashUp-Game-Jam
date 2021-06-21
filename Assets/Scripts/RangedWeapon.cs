@@ -12,6 +12,7 @@ public class RangedWeapon : MonoBehaviour
     public float damage = 2f;
     public float fireRate;
     bool isFiring;
+    bool isFiring1;
     bool isEnemy = false;
     private GameObject bulletContainer;
     void Start()
@@ -28,6 +29,10 @@ public class RangedWeapon : MonoBehaviour
         {
             StartCoroutine(FireWeapon());
         }
+        if (Input.GetMouseButton(1) && !isFiring1 && !isEnemy)
+        {
+            StartCoroutine(FireWeapon1());
+        }
     }
 
     // private void OnDrawGizmos()
@@ -37,6 +42,50 @@ public class RangedWeapon : MonoBehaviour
     //     Gizmos.color = Color.cyan;
     //     Gizmos.DrawLine(Vector2.zero,travelDir);
     // }
+    void FireBullet()
+    {
+        var particle = GameObject.Instantiate(particleEffect, transform);
+        var particle1 = GameObject.Instantiate(particleEffect1, transform);
+        Vector2 travelDir = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position));
+        travelDir = travelDir.normalized;
+        float angle = Mathf.Atan2(Input.mousePosition.y, Input.mousePosition.x) * Mathf.Rad2Deg - 90;
+        angle = Vector2.Angle(Vector2.right, travelDir);
+
+        if (angle > 0 && travelDir.y > 0)
+        {
+            particle.transform.rotation = Quaternion.Euler(0, 0, angle);
+            particle1.transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+        else if (travelDir.y < 0)
+        {
+            particle.transform.rotation = Quaternion.Euler(0, 0, angle * -1);
+            particle1.transform.rotation = Quaternion.Euler(0, 0, angle * -1);
+
+        }
+        health.DealDamage(damage);
+        AudioSource.PlayClipAtPoint(actorData.attackSound, transform.position);
+        isFiring1 = true;
+        var projectileGO = GameObject.Instantiate(projectilePrefab, transform, bulletContainer);
+        projectileGO.transform.parent = bulletContainer.transform;
+        projectileGO.transform.position = transform.position;
+
+        var projectile = projectileGO.GetComponent<Projectile>();
+
+        projectile.Init(Input.mousePosition);
+    }
+    IEnumerator FireWeapon1()
+    {
+        FireBullet();
+        yield return new WaitForSeconds(.1f);
+        FireBullet();
+        yield return new WaitForSeconds(.1f);
+        FireBullet();
+        yield return new WaitForSeconds(.1f);
+        FireBullet();
+        yield return new WaitForSeconds(3f);
+
+        isFiring1 = false;
+    }
     IEnumerator FireWeapon()
     {
         var particle = GameObject.Instantiate(particleEffect, transform);

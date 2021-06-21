@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
     {
         curHealth -= amount;
         curHealth = Mathf.Clamp(curHealth, 0, 100000);
-        healthBar.fillAmount = curHealth/health;
+        healthBar.fillAmount = curHealth / health;
         if (curHealth <= 0)
         {
             Death();
@@ -54,5 +54,11 @@ public class Health : MonoBehaviour
     void OnDestroy()
     {
         deathText.gameObject.SetActive(true);
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag =="Enemy"){
+            DealDamage(5);
+        }
     }
 }

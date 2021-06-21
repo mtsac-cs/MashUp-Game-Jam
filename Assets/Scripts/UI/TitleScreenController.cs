@@ -13,7 +13,7 @@ public class TitleScreenController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startButton.onClick.AddListener(() => SceneManager.LoadScene(""));
+        startButton.onClick.AddListener(() => SceneManager.LoadScene(1));
         exitButton.onClick.AddListener(() => gameObject.AddComponent<ExitGameComponent>());
     }
 }

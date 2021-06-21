@@ -6,8 +6,8 @@ public class EnemyAttacks : MonoBehaviour
 {
     public NodeGrid pathfinding;
     public GameObject animatorHolder;
-    public float dashCD = 3f;
-    public float jumpCD = 7f;
+    public float dashCD = 1f;
+    public float jumpCD = 3f;
     float timeSinceJump = 0;
     float timeSinceDash = 0;
     Animator animator;
@@ -24,10 +24,12 @@ public class EnemyAttacks : MonoBehaviour
         animator.SetFloat("DistanceFromPlayer", (transform.position - Player.instance.transform.position).magnitude);
         if (Time.time - timeSinceDash > dashCD)
         {
+            timeSinceDash = Time.time;
             animator.SetTrigger("SlimeDash");
         }
         if (Time.time - timeSinceJump > jumpCD)
         {
+            timeSinceJump = Time.time;
             animator.SetTrigger("JumpAttack");
         }
     }
