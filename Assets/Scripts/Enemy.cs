@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Enemy : Actor
-{
+{   
+    public static Enemy instance;
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame

@@ -9,9 +9,10 @@ public class RangedWeapon : MonoBehaviour
     public GameObject particleEffect;
     public GameObject particleEffect1;
     public ActiveActorData actorData;
+    public float damage = 2f;
     public float fireRate;
     bool isFiring;
-
+    bool isEnemy = false;
     private GameObject bulletContainer;
     void Start()
     {
@@ -23,7 +24,7 @@ public class RangedWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && !isFiring)
+        if (Input.GetMouseButton(0) && !isFiring && !isEnemy)
         {
             StartCoroutine(FireWeapon());
         }
@@ -56,7 +57,7 @@ public class RangedWeapon : MonoBehaviour
             particle1.transform.rotation = Quaternion.Euler(0, 0, angle * -1);
 
         }
-        health.DealDamage(5f);
+        health.DealDamage(damage);
         AudioSource.PlayClipAtPoint(actorData.attackSound, transform.position);
         isFiring = true;
         var projectileGO = GameObject.Instantiate(projectilePrefab, transform, bulletContainer);
@@ -69,5 +70,54 @@ public class RangedWeapon : MonoBehaviour
 
         yield return new WaitForSeconds(fireRate);
         isFiring = false;
+    }
+
+    public void EnemyWeapon()
+    {
+        var particle = GameObject.Instantiate(particleEffect, transform);
+        var particle1 = GameObject.Instantiate(particleEffect1, transform);
+        Vector2 travelDir = Player.instance.transform.position - Enemy.instance.transform.position;
+        travelDir = travelDir.normalized;
+        float angle = Vector2.Angle(Vector2.right, travelDir);
+
+        if (angle > 0 && travelDir.y > 0)
+        {
+            particle.transform.rotation = Quaternion.Euler(0, 0, angle);
+            particle1.transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+        else if (travelDir.y < 0)
+        {
+            particle.transform.rotation = Quaternion.Euler(0, 0, angle * -1);
+            particle1.transform.rotation = Quaternion.Euler(0, 0, angle * -1);
+
+        }
+        health.DealDamage(damage);
+        AudioSource.PlayClipAtPoint(actorData.attackSound, transform.position);
+        isFiring = true;
+        var projectileGO = GameObject.Instantiate(projectilePrefab, transform, bulletContainer);
+        projectileGO.transform.parent = bulletContainer.transform;
+        projectileGO.transform.position = transform.position;
+
+        var projectile = projectileGO.GetComponent<Projectile>();
+
+        projectile.Init(travelDir);
+        isFiring = false;
+    }
+    public void EnemySplash(int numBullets)
+    {
+        float angle = 360f / numBullets;
+        for (int i = 0; i < numBullets; i++)
+        {
+            Quaternion angleQ = Quaternion.Euler(0, 0, angle * i);
+            Vector3 vecForAng = angleQ * Vector2.right;
+            vecForAng = vecForAng.normalized;
+            var projectileGO = GameObject.Instantiate(projectilePrefab, transform, bulletContainer);
+            projectileGO.transform.parent = bulletContainer.transform;
+            projectileGO.transform.position = transform.position;
+
+            var projectile = projectileGO.GetComponent<Projectile>();
+
+            projectile.Init(vecForAng);
+        }
     }
 }

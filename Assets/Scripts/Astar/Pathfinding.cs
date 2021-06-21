@@ -10,6 +10,10 @@ public class Pathfinding : MonoBehaviour
     {
         grid = gameObject.GetOrAddComponent<NodeGrid>();
     }
+    void Start(){
+        seeker = GameObject.Find("Enemy").transform;
+        target = GameObject.Find("Player").transform;
+    }
     void Update(){
         FindPath(seeker.position,target.position);
     }
