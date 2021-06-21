@@ -18950,6 +18950,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1530473416018024244, guid: da6f2525c12162340b3b449d0c638cb1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530473416018024244, guid: da6f2525c12162340b3b449d0c638cb1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530473416018024244, guid: da6f2525c12162340b3b449d0c638cb1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6195920822169875480, guid: da6f2525c12162340b3b449d0c638cb1, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -18961,6 +18973,10 @@ PrefabInstance:
     - target: {fileID: 6195920822169875480, guid: da6f2525c12162340b3b449d0c638cb1, type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038345685091723396, guid: da6f2525c12162340b3b449d0c638cb1, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8038345685091723398, guid: da6f2525c12162340b3b449d0c638cb1, type: 3}
       propertyPath: m_Name
