@@ -4983,7 +4983,7 @@ GameObject:
   - component: {fileID: 2890031112409164267}
   - component: {fileID: 2890031112409164260}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5017,8 +5017,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 2.5
-  targetTag: 1
-  ignoreTag: 0
+  targetTag: 0
+  ignoreTag: 1
   bulletDamage: 5
 --- !u!212 &2890031112409164263
 SpriteRenderer:
