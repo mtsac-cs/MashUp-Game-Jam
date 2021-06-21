@@ -4,11 +4,17 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum UseableTags
+{
+    Player, Enemy
+}
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class Projectile : MonoBehaviour, IInteractable
 {
     public UnityEvent OnInteract => new UnityEvent();
     public float damageAmount = 1f;
+    public UseableTags targetTag;
+    public UseableTags ignoreTag;
 
     [NonSerialized]
     public Rigidbody2D rb;
@@ -17,11 +23,11 @@ public class Projectile : MonoBehaviour, IInteractable
     float projectileSpeed = 20f;
     float distanceTravelled = 0f;
     float maxProjectileDistance = 500;
-
+    public float bulletDamage = 5;
 
     private void Awake()
     {
-        Destroy(this.gameObject,10f);
+        Destroy(this.gameObject, 10f);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -49,10 +55,13 @@ public class Projectile : MonoBehaviour, IInteractable
         // {
         //     transform.localRotation = Quaternion.Euler(0, 0, Mathf.Abs(angle)+270);
         // }
-        if(angle>0&&travelDir.Value.y>0){
+        if (angle > 0 && travelDir.Value.y > 0)
+        {
             transform.localRotation = Quaternion.Euler(0, 0, angle);
-        }else if(travelDir.Value.y<0){
-            transform.localRotation = Quaternion.Euler(0, 0, angle*-1);
+        }
+        else if (travelDir.Value.y < 0)
+        {
+            transform.localRotation = Quaternion.Euler(0, 0, angle * -1);
         }
 
         //transform.Rotate(transform.rotation.x, transform.rotation.y, angle);
@@ -60,7 +69,7 @@ public class Projectile : MonoBehaviour, IInteractable
         direction = travelDir.Value;
         Vector2 test = new Vector2(direction.x, direction.y);
         //rb.AddForce(test * projectileSpeed * .2f, ForceMode2D.Impulse);
-        rb.AddForce(travelDir.Value * projectileSpeed * 0.1f, ForceMode2D.Impulse);
+        rb.AddForce(travelDir.Value * projectileSpeed, ForceMode2D.Impulse);
 
     }
 
@@ -109,5 +118,21 @@ public class Projectile : MonoBehaviour, IInteractable
         }
 
         Destroy(this.gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == targetTag.ToString())
+        {
+            other.GetComponent<Health>().DealDamage(5);
+            Destroy(this.gameObject);
+
+        }
+        else if (other.tag == ignoreTag.ToString())
+        {
+        }else
+        {
+            Destroy(this.gameObject);
+
+        }
     }
 }
